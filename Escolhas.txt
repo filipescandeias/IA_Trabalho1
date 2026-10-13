@@ -22,8 +22,21 @@ DataSet MetroPT3:
             Caudal_impulses    float64
             dtype: object
 
-Escolhas de classificação:
+    Escolhas de classificação:
+        Distribuição da variavel-alvo: Para a distribuição da variavel-alvo, tendo 
+em conta que temos um dataSet de classificação e regressão não supervisionado, não 
+tem nenhum variavel vinda do dataset que se possa encaixar como variavel-alvo, mas 
+decidimos criar uma variável-alvo para classificação de falhas. A varivavel-alvo 
+ficou designada como "falha" e varia entre "0" e "1" consoante as falhas dadas na 
+documentação do dataset.
 
+        Dados em falta:
+        No caso do nosso dataSet não foram encontrados nenhuns valores em falta.
 
+        Normalização:
+         
+
+        Divisão de treino e teste:
+        Decidimos para a divisão de treinos e testes fazer 50/50
 
 
