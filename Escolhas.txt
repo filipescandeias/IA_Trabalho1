@@ -35,8 +35,10 @@ DataSet MetroPT3:
 
         Normalização:
             Achamos necessário fazer a normalização do dataset por valores como 
-    a temperatura do oleo e a pressão que têm escalas diferentes, logo passamos todos os
-    campos para valores percentuais entre o 0 e 1. 
+    a temperatura do oleo e a pressão que têm escalas diferentes, a normalização foi 
+    feita apenas para o LSTM, pois o random forest trabalha diretamente com os valores 
+    exatos de cada categoria. Para a normalização utilizamos a Standart em que os dados 
+    trabalham consoante o valor médio da escala, sendo o valor médio igual a 0. 
 
         Divisão de treino e teste:
             Decidimos para a divisão de treinos e testes fazer 50/50 para dessa maneira
@@ -47,6 +49,15 @@ DataSet MetroPT3:
 
         Escolha dos algoritmos:
             Para o nosso projeto iremos utilizar os seguintes algoritmos:
-                
+                Random Forest: Para evitar o overfitting, decidimos utilizar random Forest
+                para a parte de classificação de se é falha ou não, não optamos por apenas 
+                àrvore de decisão pelo facto de termos muitos parametros a ser avaliados,
+                logo com o random forest os erros individuais vão se acabar por complementar.
+
+                Mapas Neuronais: Para a parte da regressão utilizamos as redes neuronais, mais 
+                especificamente, o LSTM (Long Short-Term memory). Optamos por escolher as 
+                redes neuronais, pois temos um volume grande dados e o LSTM é mais indicado
+                para séries temporais, no sentido que é possivel decidir atraves de gates o 
+                que cada neuronio deve reter ou não como informmação importante. 
 
 
