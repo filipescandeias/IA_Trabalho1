@@ -59,5 +59,41 @@ DataSet MetroPT3:
                 redes neuronais, pois temos um volume grande dados e o LSTM é mais indicado
                 para séries temporais, no sentido que é possivel decidir atraves de gates o 
                 que cada neuronio deve reter ou não como informmação importante. 
-
-
+        
+        Resultados do Algoritmos:
+            Random Forest:
+                Criámos indicadores extra para cada sensor (médias móveis de 5 e 15 minutos e
+                desvio padrão móvel de 15 minutos) para dar contexto ao modelo. Usámos
+                class_weight="balanced" por as falhas serem raras e um limiar de 0.20 para
+                tornar o modelo mais sensível. O RF aprende bem as falhas do treino, mas tem
+                dificuldade em detetar as do teste, pois cada falha tem um padrão diferente.
+            LSTM:
+                Prevê o RUL (minutos até à próxima falha) a partir de janelas de 30 minutos de
+                sensores. O RUL foi limitado a 1440 minutos (1 dia), pois não é possível prever
+                tempos muito longos a partir dos sensores. Usámos paragem antecipada, ficando
+                com os pesos do melhor epoch.
+                No treino a LSTM tem MAE de 50.6 min e R² de 0.107; no teste, MAE de 145.9 min
+                e R² de 0.094. Quase não supera a baseline (prever sempre a média), que tem MAE
+                de 149.6 min e R² de -0.057. Perto da falha, a LSTM não aprendeu a degradação
+                (R² de -3.488, aceitação de 4.2%, contra 5.0% da baseline). Há overfitting
+                (loss de treino muito inferior à de validação), devido a existirem muito poucas
+                falhas para aprender, tal como no Random Forest.
+        Metricas:
+            Random Forest:
+                Accuracy: percentagem de previsões corretas. Enganadora com classes
+                desbalanceadas, por isso serve só de referência.
+                Precision: das previsões de falha, quantas eram falhas reais (mede falsos alarmes).
+                Recall: das falhas reais, quantas foram detetadas. É a principal, pois perder uma
+                falha é pior do que um falso alarme.
+                F1-Score: equilíbrio entre Precision e Recall.
+                Matriz de confusão: mostra VN, FP, FN e VP, ou seja, o tipo de erros do modelo.
+                Relatório por episódio: indica se cada falha foi detetada (>= 30% dos minutos).
+            LSTM:
+                MAE: erro médio, em minutos, entre o RUL real e o previsto.
+                RMSE: semelhante ao MAE, mas penaliza mais os erros grandes.
+                R²: compara o modelo com prever sempre a média (1 é perfeito, 0 é igual à
+                média, negativo é pior).
+                Taxa de aceitação: percentagem de previsões com erro até 120 minutos.
+                Baseline: modelo que prevê sempre a média do treino, usado como referência.
+                Avaliámos também só as amostras perto da falha (RUL < 1440 min), pois é aí
+                que a previsão tem utilidade.
