@@ -41,7 +41,7 @@ DataSet MetroPT3:
     trabalham consoante o valor médio da escala, sendo o valor médio igual a 0. 
 
         Divisão de treino e teste:
-            Decidimos para a divisão de treinos e testes fazer 50/50 para dessa maneira
+            Decidimos para a divisão de treinos e testes fazer 56/44 para dessa maneira
     ser possivel ter o mesmo número de falhas dentro do treino e dos testes, logo os 
     dados serão mais precisos e concretos enquanto que se dividissemos em outros valores
     como 70/30 iria ter apenas uma falha na parte dos testes, o que gerava em dados 
